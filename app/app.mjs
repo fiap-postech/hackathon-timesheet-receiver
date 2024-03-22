@@ -27,13 +27,13 @@ export const handler = async (event) => {
         console.log(`Message sent to SQS: ${JSON.stringify(sqsResponse)}`);
 
         return {
-          statusCode: 200,
-          headers: {
+            statusCode: 200,
+            headers: {
             "Content-Type": "application/json"
-          },
-          body: {
-            "message": "Solicitação realizada com sucesso, você receberá o relatório de registro de ponto em seu e-mail."
-          }
+            },
+            body: JSON.stringify({
+                "message": "Solicitação realizada com sucesso, você receberá o relatório de registro de ponto em seu e-mail."
+            })
         };
     } catch (err) {
         console.error(err);
