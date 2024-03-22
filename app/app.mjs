@@ -28,7 +28,12 @@ export const handler = async (event) => {
 
         return {
           statusCode: 200,
-          body: JSON.stringify("Message sent to SQS"),
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: {
+            "message": "Solicitação realizada com sucesso, você receberá o relatório de registro de ponto em seu e-mail."
+          }
         };
     } catch (err) {
         console.error(err);
