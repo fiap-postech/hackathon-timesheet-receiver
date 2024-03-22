@@ -26,7 +26,7 @@ Resources:
       Environment:
         Variables:
           AWS_LAMBDA_REGION: "us-east-1"
-          AWS_SQS_QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/598135944514/test-queue"
+          AWS_SQS_QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/598135944514/prd-hackathon-time-sheet-request-queue"
   HackathonTimesheetReceiverSqsDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
