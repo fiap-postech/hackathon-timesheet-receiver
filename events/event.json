@@ -1,0 +1,97 @@
+{
+  "version": "1.0",
+  "resource": "/auth",
+  "path": "/auth",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Length": "33",
+    "Content-Type": "application/json",
+    "Host": "21h5x1c9t1.execute-api.us-east-1.amazonaws.com",
+    "Postman-Token": "95b45b62-b799-445a-9f7d-3e862de444ec",
+    "User-Agent": "PostmanRuntime/7.34.0",
+    "X-Amzn-Trace-Id": "Root=1-65496145-5dcd72b43c5996b4316faf61",
+    "X-Forwarded-For": "177.138.193.11",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https",
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate, br",
+    "cache-control": "no-cache",
+    "x-employee-id": "0000001",
+    "x-employee-email": "employee@test.com"
+  },
+  "multiValueHeaders": {
+    "Content-Length": [
+      "33"
+    ],
+    "Content-Type": [
+      "application/json"
+    ],
+    "Host": [
+      "21h5x1c9t1.execute-api.us-east-1.amazonaws.com"
+    ],
+    "Postman-Token": [
+      "95b45b62-b799-445a-9f7d-3e862de444ec"
+    ],
+    "User-Agent": [
+      "PostmanRuntime/7.34.0"
+    ],
+    "X-Amzn-Trace-Id": [
+      "Root=1-65496145-5dcd72b43c5996b4316faf61"
+    ],
+    "X-Forwarded-For": [
+      "177.138.193.11"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ],
+    "accept": [
+      "*/*"
+    ],
+    "accept-encoding": [
+      "gzip, deflate, br"
+    ],
+    "cache-control": [
+      "no-cache"
+    ]
+  },
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "requestContext": {
+    "accountId": "598135944514",
+    "apiId": "21h5x1c9t1",
+    "domainName": "21h5x1c9t1.execute-api.us-east-1.amazonaws.com",
+    "domainPrefix": "21h5x1c9t1",
+    "extendedRequestId": "N_wi9jtIIAMEPkw=",
+    "httpMethod": "POST",
+    "identity": {
+      "accessKey": null,
+      "accountId": null,
+      "caller": null,
+      "cognitoAmr": null,
+      "cognitoAuthenticationProvider": null,
+      "cognitoAuthenticationType": null,
+      "cognitoIdentityId": null,
+      "cognitoIdentityPoolId": null,
+      "principalOrgId": null,
+      "sourceIp": "177.138.193.11",
+      "user": null,
+      "userAgent": "PostmanRuntime/7.34.0",
+      "userArn": null
+    },
+    "path": "/auth",
+    "protocol": "HTTP/1.1",
+    "requestId": "N_wi9jtIIAMEPkw=",
+    "requestTime": "06/Nov/2023:21:57:25 +0000",
+    "requestTimeEpoch": 1699307845855,
+    "resourceId": "POST /auth",
+    "resourcePath": "/auth",
+    "stage": "$default"
+  },
+  "pathParameters": null,
+  "stageVariables": null,
+  "body": "{\"yearMonth\":\"2024-03\"}",
+  "isBase64Encoded": false
+}

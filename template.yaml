@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  hackathon-timesheet-receiver
+
+  Sample SAM Template for hackathon-timesheet-receiver
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 60
+
+Resources:
+  HackathonTimesheetReceiverFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: hackathon-timesheet-receiver
+      CodeUri: app/
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Policies:
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt HackathonTimesheetReceiverSqsQueue.QueueName
+      Environment:
+        Variables:
+          AWS_LAMBDA_REGION: "us-east-1"
+          AWS_SQS_QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/598135944514/test-queue"
+  HackathonTimesheetReceiverSqsDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !FindInMap [HackathonTimesheetReceiverSqsDeadQueueName, !Ref Environment, name]
+      VisibilityTimeout: 60
+  HackathonTimesheetReceiverSqsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !FindInMap [HackathonTimesheetReceiverSqsQueueName, !Ref Environment, name]
+      VisibilityTimeout: 60
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt HackathonTimesheetReceiverSqsDeadQueue.Arn
+        maxReceiveCount: 3
+
+Parameters:
+  Environment:
+    Type: String
+    Default: default
+    AllowedValues:
+      - default
+      - prod
+
+Mappings:
+  HackathonTimesheetReceiverSqsDeadQueueName:
+    default:
+      name: 'local-hackathon-time-sheet-request-dead-queue'
+    prod:
+      name: 'prd-hackathon-time-sheet-request-dead-queue'
+  HackathonTimesheetReceiverSqsQueueName:
+    default:
+      name: 'local-hackathon-time-sheet-request-queue'
+    prod:
+      name: 'prd-hackathon-time-sheet-request-queue'
+
+Outputs:
+  HackathonTimesheetReceiverFunction:
+    Description: "HackathonTimesheetReceiver Lambda Function ARN"
+    Value: !GetAtt HackathonTimesheetReceiverFunction.Arn
+  HackathonTimesheetReceiverFunctionIamRole:
+    Description: "Implicit IAM Role created for HackathonTimesheetReceiver function"
+    Value: !GetAtt HackathonTimesheetReceiverFunctionRole.Arn
