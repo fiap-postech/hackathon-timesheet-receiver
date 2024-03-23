@@ -22,24 +22,11 @@ Resources:
         - x86_64
       Policies:
         - SQSSendMessagePolicy:
-            QueueName: !GetAtt HackathonTimesheetReceiverSqsQueue.QueueName
+            QueueName: !FindInMap [HackathonTimesheetReceiverSqsQueueName, !Ref Environment, name]
       Environment:
         Variables:
           AWS_LAMBDA_REGION: "us-east-1"
           AWS_SQS_QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/598135944514/prd-hackathon-time-sheet-request-queue"
-  HackathonTimesheetReceiverSqsDeadQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: !FindInMap [HackathonTimesheetReceiverSqsDeadQueueName, !Ref Environment, name]
-      VisibilityTimeout: 60
-  HackathonTimesheetReceiverSqsQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: !FindInMap [HackathonTimesheetReceiverSqsQueueName, !Ref Environment, name]
-      VisibilityTimeout: 60
-      RedrivePolicy:
-        deadLetterTargetArn: !GetAtt HackathonTimesheetReceiverSqsDeadQueue.Arn
-        maxReceiveCount: 3
 
 Parameters:
   Environment:
@@ -50,11 +37,6 @@ Parameters:
       - prod
 
 Mappings:
-  HackathonTimesheetReceiverSqsDeadQueueName:
-    default:
-      name: 'local-hackathon-time-sheet-request-dead-queue'
-    prod:
-      name: 'prd-hackathon-time-sheet-request-dead-queue'
   HackathonTimesheetReceiverSqsQueueName:
     default:
       name: 'local-hackathon-time-sheet-request-queue'
